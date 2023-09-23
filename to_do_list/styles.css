@@ -1,0 +1,167 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    padding-top: 10vh;
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(255, 255, 255);
+    background-color: #fff;
+    font-size: 20px;
+}
+
+.todo__container,
+.todo__edit__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    padding-bottom: 1em;
+}
+
+.edit {
+    border-radius: 10px 10px 0 0;
+    border-bottom: 0;    
+}
+
+.todo__edit__container {
+    border-top: 0;
+    margin-bottom: 0em;
+    border-radius: 0px 0px 10px 10px;
+    padding-bottom: 0;
+}
+
+.todo__input__container,
+.todo__edit__input__container {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    background-image: linear-gradient(#147eb0, #143eb0);
+    border-radius: 7px 7px 0 0;
+    width: 100%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.todo__edit__input__container {
+    background-image: linear-gradient(#979797, #707070);
+    padding-bottom: 0em;
+    border-radius: 0 0 7px 7px;
+}
+
+.todo__input,
+.todo__edit__input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 0.6em;
+}
+
+.todo__input--input,
+.todo__edit__input--input {    
+    width: 340px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+}
+
+.todoo__edit__btns {
+    display: flex;
+    justify-content: space-around;
+    width: 300px;
+    padding-bottom: 1em;
+}
+
+.btn__add,
+.btn__edit,
+.btn__akcept,
+.btn__cancel {
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+}
+
+.todoo__edit__btns button {
+    width: 80px;
+}
+
+.todo__tasks {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1em;
+}
+
+.todo__tasks {
+    color: #000000;
+    font-weight: bold;
+}
+
+.task__empty {
+    font-size: 14px;
+    font-weight: 600;
+    color: #147eb0;
+    padding: 1em;
+}
+
+.task {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2em 0;
+}
+
+.task .task__btns button {
+    font-size: 18px;
+    font-weight: bold;
+    border: 0;
+    margin-left: 20px;
+    background: transparent;
+}
+
+.complete {
+    text-decoration: line-through;
+}
+
+.complete .todo--complete {
+    color: gray;
+}
+
+.hiden {
+    display: none;
+}
+
+.todo__edit__message {
+    color: red;
+    height: 60px;
+    font-weight: 400;
+    padding-top: 1em;
+}
+
+.todo--complete {
+    color: blue;
+}
+
+.todo--edit {
+    color: green;
+}
+
+.todo--delete {
+    color: red;
+}

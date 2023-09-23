@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(60deg, #3c2929 0%, #9e6868 100%);
+    font-size: 20px;
+}
+
+.date__container {
+    background-color: #fff;
+    color: #000;
+    width: 30vw;
+    height: fit-content;
+    border-radius: 8px;
+}
+
+.day {
+    text-align: center;
+    padding: 20px 50px;
+}
+
+.fun__fact {
+    text-align: center;
+    padding: 0 20px 40px 20px;
+}
+
+
+
+
+
+
+
+
+
+
+

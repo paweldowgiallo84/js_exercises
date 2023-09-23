@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/22cb135015.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./styles.css">
+    <title>ToDoList</title>
+</head>
+
+<body>
+    <div>
+        <div class="todo__container">
+            <div class="todo__input__container">
+                <span>TODO LIST</span>
+                <div class="todo__input">
+                    <input type="text" class="todo__input--input" placeholder="Wpisz zadanie do wykonania">
+                    <button class="btn__add">ADD</button>
+                </div>
+            </div>
+            <div class="todo__tasks">
+                <span>TASK TO BE COMLETED</span>
+                <span class="task__empty"></span>
+                <div class="todo__list">                
+                </div>
+            </div>
+        </div>
+        <div class="todo__edit__container hiden">
+            <div class="todo__edit__input__container">
+                <span>TODO EDIT</span>
+                <div class="todo__edit__input">
+                    <input type="text" class="todo__edit__input--input" placeholder="Edytuj opis zadania">
+                    
+                </div>
+                <p class="todo__edit__message"></p>
+                <div class="todoo__edit__btns">
+                    <button class="btn__cancel">CANCEL</button>
+                    <button class="btn__akcept">AKCEPT</button>                
+                </div>           
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
