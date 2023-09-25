@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#app__container {
+    height: 100vh;
+    width: 100vw;
+    background-image: url("./images/background-img.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#app {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+#app input {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+    padding: 0.3rem 0.8rem;
+}
+
+#app button {
+    font-size: 18px;
+    font-weight: bold;
+    width: 10rem;
+    height: 2rem;
+    background-color: rgb(35, 96, 146);
+    color: white;
+    border: 0;
+    border-radius: 5px;
+}
+
+.login__container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.058);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.075);
+    border-radius: 10px;
+    margin-top: 20vh;
+    padding: 1rem;
+    gap: 1.5rem;
+}
+
+.login__container input {
+    width: 15rem;
+    height: 2rem;
+    background-color: rgba(255, 255, 255, 0.64);
+    border-radius: 5px;
+}
+
+.login__btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem;
+}

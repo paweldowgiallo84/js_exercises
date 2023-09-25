@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/22cb135015.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./styles.css">
+    <title>ToDoApp</title>
+</head>
+
+<body>
+    <div id="app__container">
+        <div id="app">
+            <div class="login__container">
+                <input class="email__input" type="email" id="emailInput" placeholder="john.doe@sth.com">
+                <input type="text" class="username__input" id="userName" placeholder="johndoe">
+                <input class="password__input" type="password" id="passwordInput" placeholder="enter password">
+                <input class="password__input repete" type="password" id="passwordInputRepete" placeholder="verify password">
+                <hr>
+                <div class="login__btns">
+                    <button class="btn__login" id="btnLogin">Log in</button>
+                    <button class="btn__signin" id="btnSignUp">Sign Up</button>
+                    <button class="btn__logout" id="btnLogOut" class="hide">Log Out</button>
+                </div>
+            </div>
+
+
+        </div>
+        <div id="result"></div>
+    </div>
+</body>
+<script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script type="module" src="./script.js"></script>
+
+</html>
