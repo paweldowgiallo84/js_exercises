@@ -13,9 +13,19 @@ const app = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const database = firebase.database();
 
+const logInMain = document.querySelector(".login__container");
+const selectLoginSignUp = document.getElementById("selectLoginSignUp");
+const selectLoginBtn = document.getElementById("btnLoginSelect");
+const selectSignUpBtn = document.getElementById("btnSignUpSelect");
 const signInBtn = document.getElementById("btnSignUp");
 const logInBtn = document.getElementById("btnLogin");
 const loOutBtn = document.getElementById("btnLogOut");
+const spacerLine = document.querySelector(".spacer__line");
+
+const email = document.getElementById("emailInput");
+const username = document.getElementById("userName");
+const password = document.getElementById("passwordInput");
+const passwordRepete = document.getElementById("passwordInputRepete");
 
 const register = () => {
   const email = document.getElementById("emailInput").value;
@@ -23,11 +33,16 @@ const register = () => {
   const password = document.getElementById("passwordInput").value;
   const passwordRepete = document.getElementById("passwordInputRepete").value;
 
-  if (
-    validateEmail(email) == false ||
-    validatePasswordSignin(password, passwordRepete) == false
-  ) {
-    alert("Nieprawidlowy email lub hasło");
+  if (validateEmail(email) == false) {
+    alert("Nieprawidlowy adres email");
+    return;
+  }
+  if (validatePasswordSignin(password, passwordRepete) == false) {
+    alert("Nieprawdłowe hasło lub hasła się nie zgadzaja");
+    return;
+  }
+  if (validateUsername(username) == false) {
+    alert("Za krótka nazawa uzytkownika");
     return;
   }
 
@@ -100,6 +115,60 @@ const logout = () => {
     });
 };
 
+const selectLogIn = () => {
+  if (selectLoginBtn.getAttribute("selected") === "select") {
+    showLogInInputs();
+    selectLoginBtn.removeAttribute("selected");
+    return;
+  }
+  if (selectSignUpBtn.getAttribute("selected") === "select") {
+    showSignInInputs();
+    selectSignUpBtn.removeAttribute("selected");
+    showLogInInputs();
+    selectLoginBtn.setAttribute("selected", "select");
+    return;
+  } else {
+    showLogInInputs();
+    selectLoginBtn.setAttribute("selected", "select");
+  }
+};
+
+const selectSignUp = () => {
+  if (selectSignUpBtn.getAttribute("selected" === "select")) {
+    showSignInInputs();
+    selectSignUpBtn.removeAttribute("selected");
+    return;
+  }
+  if (selectLoginBtn.getAttribute("selected") === "select") {
+    showLogInInputs();
+    selectLoginBtn.removeAttribute("selected");
+    showSignInInputs();
+    selectSignUpBtn.setAttribute("selected", "select");
+    return;
+  } else {
+    showSignInInputs();
+    selectSignUpBtn.setAttribute("selected", "select");
+  }
+};
+
+const showLogInInputs = () => {
+  email.classList.toggle("hiden");
+  password.classList.toggle("hiden");
+  spacerLine.classList.toggle("hiden");
+  signInBtn.closest(".login__btns").classList.toggle("hiden");
+  logInBtn.classList.toggle("hiden");
+};
+
+const showSignInInputs = () => {
+  email.classList.toggle("hiden");
+  username.classList.toggle("hiden");
+  password.classList.toggle("hiden");
+  passwordRepete.classList.toggle("hiden");
+  spacerLine.classList.toggle("hiden");
+  signInBtn.closest(".login__btns").classList.toggle("hiden");
+  signInBtn.classList.toggle("hiden");
+};
+
 const validateEmail = (email) => {
   const regex = /^[^@]+@\w+(\.\w+)+\w$/;
 
@@ -126,6 +195,18 @@ const validatePasswordLogin = (password) => {
   }
 };
 
+const validateUsername = (username) => {
+  const regex = /^[A-Za-z][A-Za-z0-9_]{5,29}$/;
+
+  if (regex.test(username) == true) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+selectLoginBtn.addEventListener("click", selectLogIn);
+selectSignUpBtn.addEventListener("click", selectSignUp);
 signInBtn.addEventListener("click", register);
 logInBtn.addEventListener("click", login);
 loOutBtn.addEventListener("click", logout);
