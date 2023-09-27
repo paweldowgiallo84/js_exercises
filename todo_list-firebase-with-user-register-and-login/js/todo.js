@@ -8,20 +8,14 @@ const firebaseConfig = {
   appId: "1:332822760574:web:6cc3d73904d36b5b719c2f",
 };
 
-let key;
-
-const arr = [
-  { name: "pawel" },
-  { name: "jarek", age: 32 },
-  { name: "bolek", age: 5 },
-];
+// let key;
 
 const app = firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 const database = firebase.database();
 
-const user = document.querySelector(".user");
+// const user = document.querySelector(".user");
 const userEmail = JSON.parse(localStorage.getItem("userEmail"));
 const testInput = document.querySelector(".input__test");
 const testBtn = document.querySelector(".button__test");
@@ -52,11 +46,11 @@ function addTodo() {
   const dateInput = document.getElementById("todo__date");
 
   if (todoInput.value.length != 0 && dateInput.value.length != 0) {
-    const user = auth.currentUser;
+    var user = auth.currentUser;
     const todoKey = database
       .ref("users/" + user.uid + "unfinished_task/")
       .push().key;
-
+    
     if (user) {
       const userData = {
         [todoKey]: {
@@ -91,83 +85,103 @@ const showTaskToBeDone = () => {
   const todoToComplete = document.getElementsByClassName("task__container")[0];
   todoToComplete.innerHTML = "";
 
-  const user = auth.currentUser;
-  const taskArray = [];
+  var user = auth.currentUser;
 
-  database
-    .ref("users/" + user.uid + "/unfinished_task")
-    .on("value", (snapshot) => {
-      snapshot.forEach((childShapshot) => {
-        const childData = childShapshot.val();
-        taskArray.push(Object.values(childData));
-      });
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      const taskArray = [];      
+      database
+        .ref("users/" + user.uid + "/unfinished_task")
+        .on("value", (snapshot) => {
+          snapshot.forEach((childShapshot) => {
+            const childData = childShapshot.val();
+            taskArray.push(Object.values(childData));
+          });
 
-      for (let i = 0; i < taskArray.length; i++) {
-        const task_date = taskArray[i][0];
-        const task_key = taskArray[i][1];
-        const task_Description = taskArray[i][2];
-        
+          for (let i = 0; i < taskArray.length; i++) {
+            const task_date = taskArray[i][0];
+            const task_key = taskArray[i][1];
+            const task_Description = taskArray[i][2];
 
-        const task_container = document.createElement("div");
-        task_container.setAttribute("id", "task");
-        task_container.setAttribute("key", task_key);
+            const task_container = document.createElement("div");
+            task_container.setAttribute("id", "task");
+            task_container.setAttribute("key", task_key);
 
-        todoToComplete.append(task_container)
+            todoToComplete.append(task_container);
 
-        const single_task_description = document.createElement('p')
-        single_task_description.setAttribute('id', "task--desctiption") 
-        single_task_description.setAttribute('contenteditable', false)
-        single_task_description.innerHTML = task_Description
-        
-        task_container.append(single_task_description)
+            const single_task_description = document.createElement("p");
+            single_task_description.setAttribute("id", "task--desctiption");
+            single_task_description.setAttribute("contenteditable", false);
+            single_task_description.innerHTML = task_Description;
 
-        const task_tools_container = document.createElement('div')
-        task_tools_container.setAttribute('id', 'task__tools__container')
-        task_container.append(task_tools_container)
+            task_container.append(single_task_description);
 
-        const vertical_line = document.createElement('hr')
+            const task_tools_container = document.createElement("div");
+            task_tools_container.setAttribute("id", "task__tools__container");
+            task_container.append(task_tools_container);
 
-        task_tools_container.append(vertical_line)
+            const vertical_line = document.createElement("hr");
 
-        const task_tools = document.createElement('div')
-        task_tools.setAttribute("id", "task--tools")
+            task_tools_container.append(vertical_line);
 
-        task_tools_container.append(task_tools)
+            const task_tools = document.createElement("div");
+            task_tools.setAttribute("id", "task--tools");
 
-        const task_date_container = document.createElement("div")
-        task_date_container.classList.add('todo__date')
-        task_date_container.setAttribute('contenteditable', false)
+            task_tools_container.append(task_tools);
 
-        task_tools.append(task_date_container)
+            const task_date_container = document.createElement("div");
+            task_date_container.classList.add("todo__date");
+            task_date_container.setAttribute("contenteditable", false);
 
-        const task_date_output = document.createElement('p')
-        task_date_output.setAttribute('id', 'task--date')
-        task_date_output.innerHTML = task_date
+            task_tools.append(task_date_container);
 
-        task_date_container.append(task_date_output)
+            const task_date_output = document.createElement("p");
+            task_date_output.setAttribute("id", "task--date");
+            task_date_output.innerHTML = task_date;
 
-        const icon_container = document.createElement('div')
-        icon_container.classList.add('icons')
+            task_date_container.append(task_date_output);
 
-        task_tools.append(icon_container)
+            const icon_container = document.createElement("div");
+            icon_container.classList.add("icons");
 
-        const icon_done = document.createElement('i')
-        icon_done.setAttribute('id', 'taskDone')
-        icon_done.classList.add('task--done', 'fa-solid', 'fa-chevron-down', 'fa-2xl"')
+            task_tools.append(icon_container);
 
-        const icon_edit = document.createElement('i')
-        icon_edit.setAttribute('id', 'taskEdit')
-        icon_edit.classList.add('task--edit', 'fa-regular', 'fa-keyboard', 'fa-2xl"')
+            const icon_done = document.createElement("i");
+            icon_done.setAttribute("id", "taskDone");
+            icon_done.classList.add(
+              "task--done",
+              "fa-solid",
+              "fa-chevron-down",
+              'fa-2xl"'
+            );
 
-        const icon_delete = document.createElement('i')
-        icon_delete.setAttribute('id', 'taskDelete')
-        icon_delete.classList.add('task--delete', 'fa-regular', 'fa-trash-can', 'fa-xl"')
+            const icon_edit = document.createElement("i");
+            icon_edit.setAttribute("id", "taskEdit");
+            icon_edit.classList.add(
+              "task--edit",
+              "fa-regular",
+              "fa-keyboard",
+              'fa-2xl"'
+            );
 
-        icon_container.append(icon_done)
-        icon_container.append(icon_edit)
-        icon_container.append(icon_delete)
-      }
-    });
+            const icon_delete = document.createElement("i");
+            icon_delete.setAttribute("id", "taskDelete");
+            icon_delete.classList.add(
+              "task--delete",
+              "fa-regular",
+              "fa-trash-can",
+              'fa-xl"'
+            );
+
+            icon_container.append(icon_done);
+            icon_container.append(icon_edit);
+            icon_container.append(icon_delete);
+          }
+        });
+    } else {
+      console.error("Error on loading data", error);
+    }
+  });
 };
 
 function taskDone() {
@@ -197,3 +211,4 @@ const logout = () => {
 };
 
 logoutBtn.addEventListener("click", logout);
+document.addEventListener("DOMContentLoaded", showTaskToBeDone);
