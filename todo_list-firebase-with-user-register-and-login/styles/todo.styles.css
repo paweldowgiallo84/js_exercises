@@ -1,0 +1,122 @@
+#todo__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40vw;
+    min-height: 20vh;
+    height: fit-content;
+    background-color: rgba(255, 255, 255, 0.058);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.075);
+    border-radius: 10px;
+    margin-top: 20vh;
+    padding: 1rem;
+    gap: 1.5rem;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 0.3rem;
+    color: white;
+}
+
+#todo__input__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#inputs {
+    display: flex;
+    width: 90%;
+}
+
+#todo__input {
+    width: 70%;
+    height: 2.5rem;
+    border: 0;
+    border-radius: 5px;
+    margin-right: 1rem;
+}
+
+#todo__date {
+    width: 20%;
+    border: 0;
+    border-radius: 5px;
+}
+
+.todo__task__container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: fit-content;
+    background-color: hsla(0, 0%, 100%, 0.8);
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+#task__info--msg,
+#task__info--finished {
+    font-size: 22px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    padding-top: 1rem;
+    padding-left: 2rem;
+}
+
+#task {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(0, 0, 0, 0.33);
+    border-radius: 5px;
+    box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 0, 0, 0.1),
+        0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0.2);
+    margin: 1rem 1rem;
+    
+}
+
+#task--desctiption {
+    max-width: 70%;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    text-align: justify;
+    padding-left: 1rem;
+}
+
+#task--tools {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+}
+
+#task--tools p {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#task--tools i {
+    padding-right: 1rem;
+}
+
+#task--finish__date {
+    padding-right: 1rem;
+}
+
+#todo__container i:hover, i:active {
+    position: relative;
+    bottom: 5px;
+    cursor: pointer;    
+}
+
+#todo__date {
+    cursor: pointer;
+}

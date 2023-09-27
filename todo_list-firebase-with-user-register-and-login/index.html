@@ -14,29 +14,26 @@
     <div id="app__container">
         <div id="app">
 
-            <div class="login__container">
-                <div class="select" id="selectLoginSignUp">
-                    <button class="btn__login--select" id="btnLoginSelect">Log in</button>
-                    <span>OR</span>
-                    <button class="btn__signin--select" id="btnSignUpSelect">Sign Up</button>
-                </div>
-                <input class="email__input hiden" type="email" id="emailInput" placeholder="john.doe@sth.com">
+            <div class="login__container">               
+                <input class="email__input " type="email" id="emailInput" placeholder="john.doe@sth.com">
                 <input class="username__input hiden" type="text" id="userName" placeholder="johndoe">
-                <input class="password__input hiden" type="password" id="passwordInput" placeholder="enter password">
+                <input class="password__input " type="password" id="passwordInput" placeholder="enter password">
                 <input class="password__input repete hiden" type="password" id="passwordInputRepete"
                     placeholder="verify password">
-                <hr class="spacer__line hiden">
-                <div class="login__btns hiden">
-                    <button class="btn__login hiden" id="btnLogin">Log in</button>
+                <hr class="spacer__line ">
+                <div class="login__btns ">
+                    <button class="btn__login " id="btnLogin">Log in</button>
                     <button class="btn__signin hiden" id="btnSignUp">Sign Up</button>
-                    <button class="btn__logout hiden" id="btnLogOut" class="hide">Log Out</button>
+                    <p class="login__signup">Don't have an account? <span class="toggle__login__signup">SignUp</span>
+                    </p>
+                    <button class="btn__logout hiden" id="btnLogOut">Log Out</button>
                 </div>
             </div>
-
 
         </div>
         <div id="result"></div>
     </div>
+
 </body>
 <script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>

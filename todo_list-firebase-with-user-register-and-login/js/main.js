@@ -14,13 +14,13 @@ const auth = firebase.auth();
 const database = firebase.database();
 
 const logInMain = document.querySelector(".login__container");
-const selectLoginSignUp = document.getElementById("selectLoginSignUp");
-const selectLoginBtn = document.getElementById("btnLoginSelect");
-const selectSignUpBtn = document.getElementById("btnSignUpSelect");
 const signInBtn = document.getElementById("btnSignUp");
 const logInBtn = document.getElementById("btnLogin");
-const loOutBtn = document.getElementById("btnLogOut");
+// const loOutBtn = document.getElementById("btnLogOut");
 const spacerLine = document.querySelector(".spacer__line");
+
+const loginSignupQuestion = document.querySelector(".login__signup");
+const toggleChoice = document.querySelector(".toggle__login__signup");
 
 const email = document.getElementById("emailInput");
 const username = document.getElementById("userName");
@@ -60,6 +60,7 @@ const register = () => {
 
       databaseRef.child("users/" + user.uid).set(userData);
       alert("User created");
+      toggleLoginSignup();
     })
     .catch(function (error) {
       const errorCode = error.code;
@@ -71,14 +72,15 @@ const register = () => {
 
 const login = () => {
   const email = document.getElementById("emailInput").value;
-  const password = document.getElementById("passwordInput").value;
+  const password = document.getElementById("passwordInput").value;  
 
-  if (
-    validateEmail(email) == false ||
-    validatePasswordLogin(password) == false
-  ) {
-    alert("Nieprawidlowy email lub hasło");
+  if (validateEmail(email) == false) {
+    alert("Nieprawidlowy email");
     return;
+  }
+  if (validatePasswordLogin(password) == false) {
+    alert("Nieprawidłowe hasło");
+    return
   }
 
   auth
@@ -93,7 +95,11 @@ const login = () => {
 
       databaseRef.child("users/" + user.uid).update(userData);
 
-      alert("user log in");
+      localStorage.setItem("userEmail", JSON.stringify(email))
+
+      alert(`user log in`);
+
+      window.location.href = "./html/todo.html";
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -102,70 +108,35 @@ const login = () => {
     });
 };
 
-const logout = () => {
-  auth
-    .signOut()
-    .then(() => {
-      alert("User log out");
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error("Login error:", errorCode, errorMessage);
-    });
-};
+// const logout = () => {
+//   auth
+//     .signOut()
+//     .then(() => {
+//       alert("User log out");
+//     })
+//     .catch((error) => {
+//       const errorCode = error.code;
+//       const errorMessage = error.message;
+//       console.error("Login error:", errorCode, errorMessage);
+//     });
+// };
 
-const selectLogIn = () => {
-  if (selectLoginBtn.getAttribute("selected") === "select") {
-    showLogInInputs();
-    selectLoginBtn.removeAttribute("selected");
-    return;
-  }
-  if (selectSignUpBtn.getAttribute("selected") === "select") {
-    showSignInInputs();
-    selectSignUpBtn.removeAttribute("selected");
-    showLogInInputs();
-    selectLoginBtn.setAttribute("selected", "select");
-    return;
+const toggleLoginSignup = () => {
+  if (toggleChoice.textContent === "SignUp") {
+    showLoginShowSignup();
+    loginSignupQuestion.value = "Already have an account?";
+    toggleChoice.textContent = "LogIn";
   } else {
-    showLogInInputs();
-    selectLoginBtn.setAttribute("selected", "select");
+    showLoginShowSignup();
+    loginSignupQuestion.value = "Don't have an account?";
+    toggleChoice.textContent = "SignUp";
   }
 };
 
-const selectSignUp = () => {
-  if (selectSignUpBtn.getAttribute("selected" === "select")) {
-    showSignInInputs();
-    selectSignUpBtn.removeAttribute("selected");
-    return;
-  }
-  if (selectLoginBtn.getAttribute("selected") === "select") {
-    showLogInInputs();
-    selectLoginBtn.removeAttribute("selected");
-    showSignInInputs();
-    selectSignUpBtn.setAttribute("selected", "select");
-    return;
-  } else {
-    showSignInInputs();
-    selectSignUpBtn.setAttribute("selected", "select");
-  }
-};
-
-const showLogInInputs = () => {
-  email.classList.toggle("hiden");
-  password.classList.toggle("hiden");
-  spacerLine.classList.toggle("hiden");
-  signInBtn.closest(".login__btns").classList.toggle("hiden");
-  logInBtn.classList.toggle("hiden");
-};
-
-const showSignInInputs = () => {
-  email.classList.toggle("hiden");
+const showLoginShowSignup = () => {
   username.classList.toggle("hiden");
-  password.classList.toggle("hiden");
   passwordRepete.classList.toggle("hiden");
-  spacerLine.classList.toggle("hiden");
-  signInBtn.closest(".login__btns").classList.toggle("hiden");
+  logInBtn.classList.toggle("hiden");
   signInBtn.classList.toggle("hiden");
 };
 
@@ -205,8 +176,7 @@ const validateUsername = (username) => {
   }
 };
 
-selectLoginBtn.addEventListener("click", selectLogIn);
-selectSignUpBtn.addEventListener("click", selectSignUp);
+toggleChoice.addEventListener("click", toggleLoginSignup);
 signInBtn.addEventListener("click", register);
 logInBtn.addEventListener("click", login);
 loOutBtn.addEventListener("click", logout);

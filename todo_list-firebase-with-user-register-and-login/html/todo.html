@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/22cb135015.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../styles/main.styles.css">
+    <link rel="stylesheet" href="../styles/todo.styles.css">
+    <title>ToDoApp</title>
+</head>
+
+<body>
+    <div id="app__container">
+        <div id="app">
+            <div id="todo__container">
+                <p class="title">TODO WITH DATABASE</p>
+                <div id="todo__input__container">
+                    <div id="inputs">
+                        <input type="text" id="todo__input">
+                        <input type="date" id="todo__date">
+                    </div>
+                    <i id="add__todo__btn" class="fa-solid fa-right-to-bracket fa-xl" style="color: #fff;"
+                        id="todo__send--btn"></i>
+                </div>
+                <div class="todo__task__container">
+                    <p id="task__info--msg">TASK TODO</p>
+                    <div id="task">
+                        <p id="task--desctiption" contenteditable="false">Jakies zadanie do wykonania Jakies zadanie
+                            do wykonania Jakies
+                            zadanie do wykonania Jakies zadanie do wykonania Jakies zadanie do wykonania Jakies zadanie
+                            do wykonania Jakies zadanie do wykonania Jakies zadanie do wykonania zadanie do wykonania
+                            Jakies zadanie do wykonania Jakies </p>
+                        <hr>
+                        <div id="task--tools">
+                            <div class="todo__date" contenteditable="false">
+                                <p id="task--date">task date</p>
+                            </div>
+                            <div class="icons">
+                                <i id="taskDone" class="task--done fa-solid fa-chevron-down fa-2xl"
+                                    style="color: #005eff;"></i>
+                                <i id="taskEdit" class="task--edit fa-regular fa-keyboard fa-2xl"
+                                    style="color: #00640a;"></i>
+                                <i id="taskDelete" class="task--delete fa-regular fa-trash-can fa-xl"
+                                    style="color: #ff0000;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="todo__task__container">
+                    <p id="task__info--finished">FINISHED TASKS</p>
+                    <div id="task">
+                        <p id="task--desctiption" contenteditable="false">Jakies zadanie do wykonania Jakies zadanie
+                            do wykonania Jakies
+                            zadanie do wykonania Jakies zadanie do wykonania Jakies zadanie do wykonania Jakies zadanie
+                            do wykonania Jakies zadanie do wykonania Jakies zadanie do wykonania zadanie do wykonania
+                            Jakies zadanie do wykonania Jakies </p>
+                        <hr>
+                        <div id="task--tools">
+                            <div class="todo__date" contenteditable="false">
+                                <p id="task--finish__date">task date</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+<button id="todo__logout">log out</button>
+
+            </div>
+        </div>
+        <div id="result"></div>
+    </div>
+
+</body>
+<script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script type="module" src="../js/todo.js"></script>
+
+</html>
