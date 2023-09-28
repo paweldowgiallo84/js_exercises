@@ -148,3 +148,7 @@ i:active {
 #todo__date {
     cursor: pointer;
 }
+
+#todo__logout {
+    margin: 1rem auto;
+}

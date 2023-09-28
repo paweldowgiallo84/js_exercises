@@ -8,9 +8,8 @@ const firebaseConfig = {
   appId: "1:332822760574:web:6cc3d73904d36b5b719c2f",
 };
 
-// let key;
-
-const app = firebase.initializeApp(firebaseConfig);
+// const app = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 const database = firebase.database();
@@ -18,7 +17,6 @@ const database = firebase.database();
 // const user = document.querySelector(".user");
 const userEmail = JSON.parse(localStorage.getItem("userEmail"));
 const testInput = document.querySelector(".input__test");
-const testBtn = document.querySelector(".button__test");
 const taskDate = document.getElementById("task--date");
 const taskDescription = document.getElementById("task--desctiption");
 
@@ -33,13 +31,7 @@ const addTodoBtn = document.getElementById("add__todo__btn");
 const taskDoneBtn = document.getElementById("taskDone");
 const taskEditBtn = document.getElementById("taskEdit");
 const taskDeleteBtn = document.getElementById("taskDelete");
-
 const logoutBtn = document.getElementById("todo__logout");
-
-addTodoBtn.addEventListener("click", addTodo);
-taskDoneBtn.addEventListener("click", taskDone);
-taskEditBtn.addEventListener("click", taskEdit);
-taskDeleteBtn.addEventListener("click", taskDelete);
 
 function addTodo() {
   const todoInput = document.getElementById("todo__input");
@@ -50,7 +42,7 @@ function addTodo() {
     const todoKey = database
       .ref("users/" + user.uid + "unfinished_task/")
       .push().key;
-    
+
     if (user) {
       const userData = {
         [todoKey]: {
@@ -89,7 +81,7 @@ const showTaskToBeDone = () => {
 
   auth.onAuthStateChanged((user) => {
     if (user) {
-      const taskArray = [];      
+      const taskArray = [];
       database
         .ref("users/" + user.uid + "/unfinished_task")
         .on("value", (snapshot) => {
@@ -184,6 +176,8 @@ const showTaskToBeDone = () => {
   });
 };
 
+showTaskToBeDone();
+
 function taskDone() {
   console.log("done");
 }
@@ -211,4 +205,12 @@ const logout = () => {
 };
 
 logoutBtn.addEventListener("click", logout);
-document.addEventListener("DOMContentLoaded", showTaskToBeDone);
+
+window.addEventListener("load", function () {
+  this.setTimeout(() => {
+    addTodoBtn.addEventListener("click", addTodo);
+    taskDoneBtn.addEventListener("click", taskDone);
+    taskEditBtn.addEventListener("click", taskEdit);
+    taskDeleteBtn.addEventListener("click", taskDelete);
+  }, 4000);
+});
