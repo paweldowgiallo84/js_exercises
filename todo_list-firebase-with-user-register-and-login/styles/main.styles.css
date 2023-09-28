@@ -3,18 +3,26 @@
     padding: 0;
 }
 
+body {
+    background-image: url("../images/background-img-hi.webp");
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-attachment: fixed;
+}
+
 #app__container {
     height: 100vh;
     width: 100vw;
-    background-image: url("./images/background-img.jpg");
+    /* background-image: url("../images/background-img.jpg");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover;     */
 }
 
 #app {
+    min-width: 25rem;
     width: fit-content;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 1rem;       
 }
 
 #app input {
@@ -48,9 +56,9 @@
 }
 
 .login__container input {
-    width: 15rem;
+    width: 22rem;
     height: 2rem;
-    background-color: rgba(255, 255, 255, 0.64);
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 5px;
 }
 
@@ -60,4 +68,30 @@
     align-items: center;
     gap: 1rem;
     margin: 0.5rem;
+    padding-top: 0.5rem;
+}
+
+.login__btns .login__signup {
+    font-size: 20px;
+    color: white;
+    letter-spacing: 0.06rem;
+    padding-top: 1rem;
+}
+
+.toggle__login__signup {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.06rem;
+    padding-left: 0.5rem;  
+    cursor: pointer;  
+}
+
+.toggle__login__signup:hover {
+    position: relative;
+    bottom:2px;   
+transition: 0.3s all ease-in-out;
+}
+
+.hiden {
+    display: none;
 }
