@@ -19,6 +19,8 @@ const userEmail = JSON.parse(localStorage.getItem("userEmail"));
 const testInput = document.querySelector(".input__test");
 const taskDate = document.getElementById("task--date");
 const taskDescription = document.getElementById("task--desctiption");
+const todoToComplete = document.getElementsByClassName("task__container")[0];
+const finishedTodo = document.getElementsByClassName("task__container")[1];
 
 // if (userEmail) {
 //   console.log("User email:", userEmail);
@@ -74,7 +76,6 @@ function addTodo() {
 }
 
 const showTaskToBeDone = () => {
-  const todoToComplete = document.getElementsByClassName("task__container")[0];
   todoToComplete.innerHTML = "";
 
   var user = auth.currentUser;
@@ -140,6 +141,7 @@ const showTaskToBeDone = () => {
 
             const icon_done = document.createElement("i");
             icon_done.setAttribute("id", "taskDone");
+            icon_done.setAttribute("key", task_key);
             icon_done.classList.add(
               "task--done",
               "fa-solid",
@@ -149,6 +151,7 @@ const showTaskToBeDone = () => {
 
             const icon_edit = document.createElement("i");
             icon_edit.setAttribute("id", "taskEdit");
+            icon_done.setAttribute("key", task_key);
             icon_edit.classList.add(
               "task--edit",
               "fa-regular",
@@ -158,6 +161,7 @@ const showTaskToBeDone = () => {
 
             const icon_delete = document.createElement("i");
             icon_delete.setAttribute("id", "taskDelete");
+            icon_done.setAttribute("key", task_key);
             icon_delete.classList.add(
               "task--delete",
               "fa-regular",
@@ -178,7 +182,15 @@ const showTaskToBeDone = () => {
 
 showTaskToBeDone();
 
-function taskDone() {
+function taskDone(target) {
+  finishedTodo.innerHTML = "";
+
+  const completedTask = target.closest("#task");
+  finishedTodo.append(completedTask);
+
+  console.log(currentDate());
+
+  console.log(completedTask);
   console.log("done");
 }
 
@@ -188,6 +200,31 @@ function taskEdit() {
 
 function taskDelete() {
   console.log("delete");
+}
+
+todoToComplete.addEventListener("click", function (event) {
+  const target = event.target;
+
+  if (target.id === "taskDone") {
+    taskDone(target);
+  } else if (target.id === "taskEdit") {
+    taskEdit();
+  } else if (target.id === "taskDelete") {
+    taskDelete();
+  }
+});
+
+function currentDate() {
+  const newDate = new Date();
+  const currentYear = newDate.getUTCFullYear()
+  const currentMonth =
+    newDate.getUTCMonth() + 1 < 10
+      ? "0" + (newDate.getUTCMonth() + 1)
+      : newDate.getUTCMonth() + 1;
+  const currentDay = newDate.getUTCDate();
+
+  const currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
+  return currentDate;
 }
 
 const logout = () => {
@@ -206,12 +243,3 @@ const logout = () => {
 };
 
 logoutBtn.addEventListener("click", logout);
-
-window.addEventListener("load", function () {
-  this.setTimeout(() => {
-    addTodoBtn.addEventListener("click", addTodo);
-    taskDoneBtn.addEventListener("click", taskDone);
-    taskEditBtn.addEventListener("click", taskEdit);
-    taskDeleteBtn.addEventListener("click", taskDelete);
-  }, 4000);
-});
