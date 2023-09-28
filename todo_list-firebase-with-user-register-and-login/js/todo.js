@@ -196,6 +196,7 @@ const logout = () => {
     .then(() => {
       localStorage.removeItem("userEmail");
       alert("User log out");
+      window.location.href = "../index.html";
     })
     .catch((error) => {
       const errorCode = error.code;

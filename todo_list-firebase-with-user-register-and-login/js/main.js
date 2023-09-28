@@ -16,9 +16,7 @@ const database = firebase.database();
 const logInMain = document.querySelector(".login__container");
 const signInBtn = document.getElementById("btnSignUp");
 const logInBtn = document.getElementById("btnLogin");
-// const loOutBtn = document.getElementById("btnLogOut");
 const spacerLine = document.querySelector(".spacer__line");
-
 const loginSignupQuestion = document.querySelector(".login__signup");
 const toggleChoice = document.querySelector(".toggle__login__signup");
 
@@ -108,19 +106,6 @@ const login = () => {
     });
 };
 
-// const logout = () => {
-//   auth
-//     .signOut()
-//     .then(() => {
-//       alert("User log out");
-//     })
-//     .catch((error) => {
-//       const errorCode = error.code;
-//       const errorMessage = error.message;
-//       console.error("Login error:", errorCode, errorMessage);
-//     });
-// };
-
 const toggleLoginSignup = () => {
   if (toggleChoice.textContent === "SignUp") {
     showLoginShowSignup();
@@ -179,4 +164,4 @@ const validateUsername = (username) => {
 toggleChoice.addEventListener("click", toggleLoginSignup);
 signInBtn.addEventListener("click", register);
 logInBtn.addEventListener("click", login);
-loOutBtn.addEventListener("click", logout);
+
