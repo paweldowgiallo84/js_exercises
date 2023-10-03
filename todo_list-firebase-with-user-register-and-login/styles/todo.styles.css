@@ -68,7 +68,7 @@
     padding-left: 2rem;
 }
 
-.task__container{
+.task__container {
     width: 100%;
 }
 
@@ -82,7 +82,7 @@
 
 #task,
 #task__finished {
-    width: 90%;
+    width: 85%;
     display: flex;
     justify-content: space-between;
     padding: 1rem;
@@ -91,7 +91,7 @@
     border-radius: 5px;
     box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 0, 0, 0.1),
         0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0.2);
-    margin: 1rem 1rem;
+    margin: 1rem auto;
 
 }
 
@@ -119,7 +119,7 @@
 }
 
 #task--tools i {
-    padding-right: 1rem;
+    padding: 0.5rem;
 }
 
 .task--done {
@@ -148,10 +148,136 @@
     cursor: pointer;
 }
 
-#todo__date {
+.todo__date {
     cursor: pointer;
 }
 
 #todo__logout {
     margin: 1rem auto;
+}
+
+#input__edit__container {
+    position: absolute;
+    width: 30rem;    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#input__edit__container input {
+    height: 1.5rem;
+    border: 1px solid gray;
+    border-radius: 0.2rem;
+}
+
+#app #input__edit__container button {
+    background-color: transparent;
+    color: black;
+    padding-top: 1rem;
+}
+
+.todo__edit__input {
+    margin-right: 1rem;
+}
+
+
+
+@media (max-width: 920px) {
+    #todo__date {
+        width: 1.3rem;
+    }
+
+    #task,
+    #task__finished {
+        width: 85%;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1080px) {
+    #todo__container {
+        min-width: 75vw;
+    }
+}
+
+@media (min-width: 351px) and (max-width:700px) {
+    #todo__container {
+        width: 75vw;
+    }
+
+    #task--tools {
+        min-width: 4rem;
+    }
+
+    #task,
+    #task__finished {
+        width: 78%;
+    }
+
+    .title {
+        text-align: center;
+    }
+}
+
+@media (max-width: 500px) {
+    #task--desctiption {
+        font-size: 14px;
+        padding-left: 0.1rem;
+        padding-right: 0.5rem;
+    }
+
+    #task--tools p {
+        font-size: 12px;
+    }
+
+    #task--tools i {
+        transform: scale(0.8);
+        padding: 0.2rem;
+    }
+
+    .todo__task__container {
+        align-items: center;
+    }
+
+    #task__info--msg,
+    #task__info--finished {
+        padding-left: 0;
+    }
+
+    #todo__container .title {
+        text-align: center;
+    }
+
+    #todo__date {
+        width: 1.3rem;
+        margin-right: 0.5rem;
+    }
+}
+
+@media (max-width: 350px) {
+    #todo__container {
+        width: 16.8rem;
+    }
+
+    .task__container {
+        width: 100%;
+    }
+
+    #task,
+    #task__finished {
+        width: 13rem;
+    }
+
+    #task--desctiption {
+        font-size: 14px;
+        padding-left: 0.1rem;
+        padding-right: 0.5rem;
+    }
+
+    #task--tools {
+        min-width: 4rem;
+    }
+
+    #task--tools p {
+        font-size: 12px;
+    }
 }

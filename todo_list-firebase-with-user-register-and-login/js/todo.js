@@ -8,7 +8,6 @@ const firebaseConfig = {
   appId: "1:332822760574:web:6cc3d73904d36b5b719c2f",
 };
 
-// const app = firebase.initializeApp(firebaseConfig);
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
@@ -19,6 +18,8 @@ const userEmail = JSON.parse(localStorage.getItem("userEmail"));
 const testInput = document.querySelector(".input__test");
 const taskDate = document.getElementById("task--date");
 const taskDescription = document.getElementById("task--desctiption");
+const todoToComplete = document.getElementsByClassName("task__container")[0];
+const finishedTodo = document.getElementsByClassName("task__container")[1];
 
 // if (userEmail) {
 //   console.log("User email:", userEmail);
@@ -74,7 +75,6 @@ function addTodo() {
 }
 
 const showTaskToBeDone = () => {
-  const todoToComplete = document.getElementsByClassName("task__container")[0];
   todoToComplete.innerHTML = "";
 
   var user = auth.currentUser;
@@ -103,7 +103,6 @@ const showTaskToBeDone = () => {
 
             const single_task_description = document.createElement("p");
             single_task_description.setAttribute("id", "task--desctiption");
-            single_task_description.setAttribute("contenteditable", false);
             single_task_description.innerHTML = task_Description;
 
             task_container.append(single_task_description);
@@ -123,7 +122,6 @@ const showTaskToBeDone = () => {
 
             const task_date_container = document.createElement("div");
             task_date_container.classList.add("todo__date");
-            task_date_container.setAttribute("contenteditable", false);
 
             task_tools.append(task_date_container);
 
@@ -140,6 +138,7 @@ const showTaskToBeDone = () => {
 
             const icon_done = document.createElement("i");
             icon_done.setAttribute("id", "taskDone");
+            icon_done.setAttribute("key", task_key);
             icon_done.classList.add(
               "task--done",
               "fa-solid",
@@ -149,6 +148,7 @@ const showTaskToBeDone = () => {
 
             const icon_edit = document.createElement("i");
             icon_edit.setAttribute("id", "taskEdit");
+            icon_edit.setAttribute("key", task_key);
             icon_edit.classList.add(
               "task--edit",
               "fa-regular",
@@ -158,6 +158,7 @@ const showTaskToBeDone = () => {
 
             const icon_delete = document.createElement("i");
             icon_delete.setAttribute("id", "taskDelete");
+            icon_delete.setAttribute("key", task_key);
             icon_delete.classList.add(
               "task--delete",
               "fa-regular",
@@ -176,18 +177,277 @@ const showTaskToBeDone = () => {
   });
 };
 
-showTaskToBeDone();
+const showFinishedTasks = () => {
+  finishedTodo.innerHTML = "";
 
-function taskDone() {
-  console.log("done");
+  var user = auth.currentUser;
+
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      const taskDoneArray = [];
+      database
+        .ref("users/" + user.uid + "/finished_task")
+        .on("value", (snapshot) => {
+          snapshot.forEach((childShapshot) => {
+            const childData = childShapshot.val();
+            taskDoneArray.push(Object.values(childData));
+          });
+
+          for (let i = 0; i < taskDoneArray.length; i++) {
+            const task_date = taskDoneArray[i][0];
+            const task_key = taskDoneArray[i][1];
+            const task_Description = taskDoneArray[i][2];
+
+            const task_container = document.createElement("div");
+            task_container.setAttribute("id", "task");
+            task_container.setAttribute("key", task_key);
+
+            finishedTodo.append(task_container);
+
+            const single_task_description = document.createElement("p");
+            single_task_description.setAttribute("id", "task--desctiption");
+            single_task_description.innerHTML = task_Description;
+
+            task_container.append(single_task_description);
+
+            const task_tools_container = document.createElement("div");
+            task_tools_container.setAttribute("id", "task__tools__container");
+            task_container.append(task_tools_container);
+
+            const vertical_line = document.createElement("hr");
+
+            task_tools_container.append(vertical_line);
+
+            const task_tools = document.createElement("div");
+            task_tools.setAttribute("id", "task--tools");
+
+            task_tools_container.append(task_tools);
+
+            const task_date_container = document.createElement("div");
+            task_date_container.classList.add("todo__date");
+
+            task_tools.append(task_date_container);
+
+            const task_date_output = document.createElement("p");
+            task_date_output.setAttribute("id", "task--finish__date");
+            task_date_output.innerHTML = task_date;
+
+            task_date_container.append(task_date_output);
+          }
+        });
+    } else {
+      console.error("Error on loading data", error);
+    }
+  });
+};
+
+function taskDone(target) {
+  const tascCompletedTitle = target.closest("#task").firstChild.innerHTML;
+  const taskCompletedDate = currentDate();
+
+  var user = auth.currentUser;
+  const todoKey = target.getAttribute("key");
+
+  if (user) {
+    const completedTodo = {
+      [todoKey]: {
+        date: taskCompletedDate,
+        task: tascCompletedTitle,
+        key: todoKey,
+      },
+    };
+
+    const todoToRemove = {
+      [todoKey]: null,
+    };
+
+    console.log(completedTodo);
+
+    const userRef = database.ref("users/" + user.uid + "/finished_task");
+    const userRefRemove = database.ref(
+      "users/" + user.uid + "/unfinished_task"
+    );
+
+    userRef
+      .update(completedTodo)
+      .then(() => {
+        userRefRemove
+          .update(todoToRemove)
+          .then(() => {
+            console.log("task moved to finished task");
+          })
+
+          .catch((error) => {
+            console.error("Error while updating user data", error);
+          });
+        showTaskToBeDone();
+        showFinishedTasks();
+      })
+      .catch((error) => {
+        console.error("Error while updating user data", error);
+      });
+  } else {
+    console.error("User is not authenticated");
+  }
 }
 
-function taskEdit() {
-  console.log("edit");
+function taskEdit(target) {
+  const taskToEdit = target.closest("#task");
+  const key = taskToEdit.getAttribute("key");
+
+  const taskToChangeCount = taskToEdit.parentElement.querySelectorAll(
+    "#input__edit__container"
+  );
+
+  if (taskToChangeCount.length >= 1) return;
+  else {
+    const inputEditContainer = document.createElement("div");
+    inputEditContainer.setAttribute("id", "input__edit__container");
+    inputEditContainer.setAttribute("key", key);
+
+    taskToEdit.append(inputEditContainer);
+
+    const inputEdit = document.createElement("input");
+    const inputDateEdit = document.createElement("input");
+
+    inputEdit.type = "text";
+    inputDateEdit.type = "date";
+
+    inputEdit.classList.add("todo__edit__input");
+    inputDateEdit.classList.add("todo__edit__date");
+
+    inputEdit.value = taskToEdit.firstChild.innerHTML;
+    inputDateEdit.value = taskToEdit.children
+      .item(1)
+      .children.item(1).firstChild.firstChild.innerHTML;
+
+    inputEditContainer.append(inputEdit);
+    inputEditContainer.append(inputDateEdit);
+
+    const submitEdit = document.createElement("button");
+    const cancelEdit = document.createElement("button");
+
+    submitEdit.setAttribute("id", "submit__edit");
+    submitEdit.setAttribute("key", key);
+
+    cancelEdit.setAttribute("id", "cancel__edit");
+    cancelEdit.setAttribute("key", key);
+
+    submitEdit.textContent = "EDIT";
+    cancelEdit.textContent = "CANCEL EDIT";
+
+    inputEditContainer.append(submitEdit);
+    inputEditContainer.append(cancelEdit);
+
+    const cancelBtn = document.getElementById("cancel__edit");
+    const submitBtn = document.getElementById("submit__edit");
+
+    cancelBtn.addEventListener("click", (e) => {
+      inputEditContainer.remove("div");
+
+      console.log(e.target);
+    });
+
+    submitBtn.addEventListener("click", (e) => {    
+      const taskAfterChange = e.target.closest(
+        "#input__edit__container"
+      ).firstChild;
+
+      const taskDateAfterChange = e.target
+        .closest("#input__edit__container")
+        .children.item(1);
+
+      if (
+        taskAfterChange.value.length != 0 &&
+        taskDateAfterChange.value.length != 0
+      ) {
+        var user = auth.currentUser;
+
+        if (user) {
+          const userData = {
+            [key]: {
+              date: taskDateAfterChange.value,
+              task: taskAfterChange.value,
+              key: key,
+            },
+          };
+
+          const userRef = database.ref(
+            "users/" + user.uid + "/unfinished_task"
+          );
+
+          userRef
+            .update(userData)
+            .then(() => {
+              inputEditContainer.remove("div");
+            })
+
+            .catch((error) => {
+              console.error("Error while updating user data", error);
+            });
+          showTaskToBeDone();
+        } else {
+          console.error("User is not authenticated");
+        }
+      } else {
+        console.error("Please fill task and data field");
+      }
+    });
+  }
 }
 
-function taskDelete() {
-  console.log("delete");
+function taskDelete(target) {
+  var user = auth.currentUser;
+  const taskKey = target.getAttribute("key");
+
+  if (user) {
+    const userData = {
+      [taskKey]: null,
+    };
+
+    const userRef = database.ref("users/" + user.uid + "/unfinished_task");
+
+    userRef
+      .update(userData)
+      .then(() => {
+        console.log("Todo has been removed");
+      })
+
+      .catch((error) => {
+        console.error("Error while removing user data", error);
+      });
+    showTaskToBeDone();
+  } else {
+    console.error("User is not authenticated");
+  }
+}
+
+todoToComplete.addEventListener("click", function (event) {
+  const target = event.target;
+
+  if (target.id === "taskDone") {
+    taskDone(target);
+  } else if (target.id === "taskEdit") {
+    taskEdit(target);
+  } else if (target.id === "taskDelete") {
+    taskDelete(target);
+  }
+});
+
+function currentDate() {
+  const newDate = new Date();
+  const currentYear = newDate.getUTCFullYear();
+  const currentMonth =
+    newDate.getUTCMonth() + 1 < 10
+      ? "0" + (newDate.getUTCMonth() + 1)
+      : newDate.getUTCMonth() + 1;
+  const currentDay =
+    newDate.getUTCDate() < 10
+      ? "0" + newDate.getUTCDate()
+      : newDate.getUTCDate();
+
+  const currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
+  return currentDate;
 }
 
 const logout = () => {
@@ -205,13 +465,19 @@ const logout = () => {
     });
 };
 
-logoutBtn.addEventListener("click", logout);
+const runOnceOnPageLoad = (function () {
+  let hasRun = false;
 
-window.addEventListener("load", function () {
-  this.setTimeout(() => {
-    addTodoBtn.addEventListener("click", addTodo);
-    taskDoneBtn.addEventListener("click", taskDone);
-    taskEditBtn.addEventListener("click", taskEdit);
-    taskDeleteBtn.addEventListener("click", taskDelete);
-  }, 4000);
-});
+  return function () {
+    if (!hasRun) {
+      showTaskToBeDone();
+      showFinishedTasks();
+      hasRun = true;
+    }
+  };
+})();
+
+runOnceOnPageLoad();
+
+addTodoBtn.addEventListener("click", addTodo);
+logoutBtn.addEventListener("click", logout);

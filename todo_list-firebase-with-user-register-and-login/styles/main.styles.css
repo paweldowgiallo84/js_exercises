@@ -12,14 +12,11 @@ body {
 
 #app__container {
     height: 100vh;
-    width: 100vw;
-    /* background-image: url("../images/background-img.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;     */
+    width: 100vw;    
 }
 
 #app {
-    min-width: 25rem;
+    min-width: 20rem;
     width: fit-content;
     margin: 0 auto;
     padding: 1rem;       
@@ -94,4 +91,17 @@ transition: 0.3s all ease-in-out;
 
 .hiden {
     display: none;
+}
+
+@media (max-width: 350px) {
+#app {
+    width: 320px;
+}
+.login__container input {
+    width: 16rem;
+}
+.login__btns {
+    text-align: center;
+    line-height: 2rem;
+}
 }
