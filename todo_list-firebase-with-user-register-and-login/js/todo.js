@@ -304,7 +304,7 @@ function taskEdit(target) {
     const inputEditContainer = document.createElement("div");
     inputEditContainer.setAttribute("id", "input__edit__container");
     inputEditContainer.setAttribute("key", key);
-    
+
     taskToEdit.append(inputEditContainer);
 
     const inputEdit = document.createElement("input");
@@ -316,7 +316,7 @@ function taskEdit(target) {
     inputEdit.classList.add("todo__edit__input");
     inputDateEdit.classList.add("todo__edit__date");
 
-    inputEdit.setAttribute("placeholder", taskToEdit.firstChild.innerHTML);
+    inputEdit.value = taskToEdit.firstChild.innerHTML;
     inputDateEdit.value = taskToEdit.children
       .item(1)
       .children.item(1).firstChild.firstChild.innerHTML;
@@ -348,17 +348,50 @@ function taskEdit(target) {
       console.log(e.target);
     });
 
-    submitBtn.addEventListener("click", (e) => {
-      //       console.log(
-      //   "after: ",
-      //   e.target.closest("#input__edit__container").children.item(1)
-      // );
-      const taskToChane = e.target.closest("#task").firstChild;
-      const changeTask = e.target.closest("#input__edit__container").firstChild;
+    submitBtn.addEventListener("click", (e) => {    
+      const taskAfterChange = e.target.closest(
+        "#input__edit__container"
+      ).firstChild;
 
-      console.log(taskToChane);
-      console.log(changeTask);
-      // changedTask =
+      const taskDateAfterChange = e.target
+        .closest("#input__edit__container")
+        .children.item(1);
+
+      if (
+        taskAfterChange.value.length != 0 &&
+        taskDateAfterChange.value.length != 0
+      ) {
+        var user = auth.currentUser;
+
+        if (user) {
+          const userData = {
+            [key]: {
+              date: taskDateAfterChange.value,
+              task: taskAfterChange.value,
+              key: key,
+            },
+          };
+
+          const userRef = database.ref(
+            "users/" + user.uid + "/unfinished_task"
+          );
+
+          userRef
+            .update(userData)
+            .then(() => {
+              inputEditContainer.remove("div");
+            })
+
+            .catch((error) => {
+              console.error("Error while updating user data", error);
+            });
+          showTaskToBeDone();
+        } else {
+          console.error("User is not authenticated");
+        }
+      } else {
+        console.error("Please fill task and data field");
+      }
     });
   }
 }
@@ -395,7 +428,7 @@ todoToComplete.addEventListener("click", function (event) {
   if (target.id === "taskDone") {
     taskDone(target);
   } else if (target.id === "taskEdit") {
-    taskEdit(target);   
+    taskEdit(target);
   } else if (target.id === "taskDelete") {
     taskDelete(target);
   }
@@ -408,7 +441,10 @@ function currentDate() {
     newDate.getUTCMonth() + 1 < 10
       ? "0" + (newDate.getUTCMonth() + 1)
       : newDate.getUTCMonth() + 1;
-  const currentDay = newDate.getUTCDate();
+  const currentDay =
+    newDate.getUTCDate() < 10
+      ? "0" + newDate.getUTCDate()
+      : newDate.getUTCDate();
 
   const currentDate = `${currentYear}-${currentMonth}-${currentDay}`;
   return currentDate;
