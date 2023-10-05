@@ -224,8 +224,8 @@ const showFinishedTasks = () => {
             task_tools_container.append(task_tools);
 
             const task_date_container = document.createElement("div");
-            task_date_container.classList.add("todo__date");
-
+            task_date_container.classList.add("todo__date", "todo__date--no__cursor");
+            
             task_tools.append(task_date_container);
 
             const task_date_output = document.createElement("p");
@@ -259,9 +259,7 @@ function taskDone(target) {
 
     const todoToRemove = {
       [todoKey]: null,
-    };
-
-    console.log(completedTodo);
+    }; 
 
     const userRef = database.ref("users/" + user.uid + "/finished_task");
     const userRefRemove = database.ref(
@@ -274,7 +272,7 @@ function taskDone(target) {
         userRefRemove
           .update(todoToRemove)
           .then(() => {
-            console.log("task moved to finished task");
+            // console.log("task moved to finished task");
           })
 
           .catch((error) => {
@@ -343,9 +341,7 @@ function taskEdit(target) {
     const submitBtn = document.getElementById("submit__edit");
 
     cancelBtn.addEventListener("click", (e) => {
-      inputEditContainer.remove("div");
-
-      console.log(e.target);
+      inputEditContainer.remove("div");      
     });
 
     submitBtn.addEventListener("click", (e) => {    
@@ -410,7 +406,7 @@ function taskDelete(target) {
     userRef
       .update(userData)
       .then(() => {
-        console.log("Todo has been removed");
+        // console.log("Todo has been removed");
       })
 
       .catch((error) => {

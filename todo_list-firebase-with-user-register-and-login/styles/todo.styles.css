@@ -152,6 +152,10 @@
     cursor: pointer;
 }
 
+.todo__date--no__cursor {
+    cursor: text;
+}
+
 #todo__logout {
     margin: 1rem auto;
 }
