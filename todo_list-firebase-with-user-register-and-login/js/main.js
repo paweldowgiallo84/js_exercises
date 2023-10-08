@@ -19,6 +19,11 @@ const logInBtn = document.getElementById("btnLogin");
 const spacerLine = document.querySelector(".spacer__line");
 const loginSignupQuestion = document.querySelector(".login__signup");
 const toggleChoice = document.querySelector(".toggle__login__signup");
+const emailMsg = document.getElementById('email__msg')
+const usernameMsg = document.getElementById('username__msg')
+const passwordMsg = document.getElementById('password__msg')
+const passwordInputRepetelMsg = document.getElementById('passwordInputRepete__msg')
+
 
 const email = document.getElementById("emailInput");
 const username = document.getElementById("userName");
@@ -70,15 +75,17 @@ const register = () => {
 
 const login = () => {
   const email = document.getElementById("emailInput").value;
-  const password = document.getElementById("passwordInput").value;  
+  const password = document.getElementById("passwordInput").value;
 
   if (validateEmail(email) == false) {
-    alert("Nieprawidlowy email");
+    emailMsg.innerHTML = 'Invalid email'
+    emailMsg.classList.add('invalid')
     return;
   }
   if (validatePasswordLogin(password) == false) {
-    alert("Nieprawidłowe hasło");
-    return
+    passwordMsg.innerHTML = 'Invalid password'
+    passwordMsg.classList.add('invalid')
+    return;
   }
 
   auth
@@ -93,9 +100,7 @@ const login = () => {
 
       databaseRef.child("users/" + user.uid).update(userData);
 
-      localStorage.setItem("userEmail", JSON.stringify(email))
-
-      alert(`user log in`);
+      localStorage.setItem("userEmail", JSON.stringify(email));
 
       window.location.href = "./html/todo.html";
     })
@@ -164,4 +169,3 @@ const validateUsername = (username) => {
 toggleChoice.addEventListener("click", toggleLoginSignup);
 signInBtn.addEventListener("click", register);
 logInBtn.addEventListener("click", login);
-

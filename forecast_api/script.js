@@ -1,4 +1,5 @@
 const locationCity = document.getElementById("location");
+const errorMsg = document.getElementById('error')
 const locationInput = document.getElementById("location--input");
 const searchBtn = document.getElementById("location--button");
 const weatherGraphic = document.getElementById(
@@ -34,17 +35,16 @@ const getWeather = () => {
       resultHumidity.innerHTML = hum;
 
       weatherGraphic.innerHTML = ''
+      errorMsg.innerHTML = ''
         const icon = document.createElement("img");
         icon.setAttribute("src", `./images/${weatherIcon}.png`);
-        icon.setAttribute("alt", "weather icon");
-        // icon.classList.add("weather__icon");
+        icon.setAttribute("alt", "weather icon");        
         weatherGraphic.append(icon);
 
       locationInput.value = "";
-
-      //   console.log(weatherIcon)
+    
     })
-    .catch((err) => console.error("Faild to tefch data"));
+    .catch((err) => errorMsg.innerHTML = `Podaj prawidłową nazwę miasta`);
 };
 
 searchBtn.addEventListener("click", getWeather);

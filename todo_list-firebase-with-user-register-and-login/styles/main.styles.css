@@ -6,20 +6,21 @@
 body {
     background-image: url("../images/background-img-hi.webp");
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: cover;
     background-attachment: fixed;
+    font-family: "Gabarito";
 }
 
 #app__container {
     height: 100vh;
-    width: 100vw;    
+    width: 100vw;
 }
 
-#app {
-    min-width: 20rem;
+#app {    
+    min-width: 15rem;
     width: fit-content;
     margin: 0 auto;
-    padding: 1rem;       
+    padding: 1rem;
 }
 
 #app input {
@@ -38,6 +39,17 @@ body {
     color: white;
     border: 0;
     border-radius: 5px;
+}
+
+.message {    
+    height: 1rem;
+    font-size: 1rem;
+    color: white;
+    margin: 0 auto;
+}
+
+.invalid {
+    color: tomato;
 }
 
 .login__container {
@@ -79,29 +91,32 @@ body {
     font-size: 22px;
     font-weight: bold;
     letter-spacing: 0.06rem;
-    padding-left: 0.5rem;  
-    cursor: pointer;  
+    padding-left: 0.5rem;
+    cursor: pointer;
 }
 
 .toggle__login__signup:hover {
     position: relative;
-    bottom:2px;   
-transition: 0.3s all ease-in-out;
+    bottom: 2px;
+    transition: 0.3s all ease-in-out;
 }
 
 .hiden {
     display: none;
 }
 
-@media (max-width: 350px) {
-#app {
-    width: 320px;
-}
-.login__container input {
-    width: 16rem;
-}
-.login__btns {
-    text-align: center;
-    line-height: 2rem;
-}
+@media (max-width: 460px) {
+    #app {
+        width: 90%;
+    }
+
+    .login__container input {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .login__btns {
+        text-align: center;
+        line-height: 2rem;
+    }
 }
