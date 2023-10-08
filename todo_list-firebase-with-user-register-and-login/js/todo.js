@@ -224,8 +224,11 @@ const showFinishedTasks = () => {
             task_tools_container.append(task_tools);
 
             const task_date_container = document.createElement("div");
-            task_date_container.classList.add("todo__date", "todo__date--no__cursor");
-            
+            task_date_container.classList.add(
+              "todo__date",
+              "todo__date--no__cursor"
+            );
+
             task_tools.append(task_date_container);
 
             const task_date_output = document.createElement("p");
@@ -259,7 +262,7 @@ function taskDone(target) {
 
     const todoToRemove = {
       [todoKey]: null,
-    }; 
+    };
 
     const userRef = database.ref("users/" + user.uid + "/finished_task");
     const userRefRemove = database.ref(
@@ -341,10 +344,10 @@ function taskEdit(target) {
     const submitBtn = document.getElementById("submit__edit");
 
     cancelBtn.addEventListener("click", (e) => {
-      inputEditContainer.remove("div");      
+      inputEditContainer.remove("div");
     });
 
-    submitBtn.addEventListener("click", (e) => {    
+    submitBtn.addEventListener("click", (e) => {
       const taskAfterChange = e.target.closest(
         "#input__edit__container"
       ).firstChild;
@@ -427,7 +430,7 @@ todoToComplete.addEventListener("click", function (event) {
     taskEdit(target);
   } else if (target.id === "taskDelete") {
     taskDelete(target);
-  }
+  } 
 });
 
 function currentDate() {
