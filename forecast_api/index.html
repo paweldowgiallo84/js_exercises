@@ -7,32 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
 
-    <title>Document</title>
+    <title>Weather App</title>
 </head>
 
 <body>
-    <div id="weather__container">
+    <div class="weather_wrapper">
         <p class="title">WEATHER</p>
-        <div id="location__graphic">
+        <div id="location_wrapper" class="location__wrapper">
             <div id="weather_localization">
-                <p id="location"></p>
-                <input type="text" id="location--input" placeholder="Insert city name">
-                <button id="location--button">SEARCH</button>
-                <p id="error"></p>
+                <p id="location" class="location__name"></p>
+                <input type="text" id="locationInput" class="location__input" placeholder="Insert city name">
+                <button id="locationBtn" class="location__btn">SEARCH</button>
+                <p id="error" class="location__err__msg"></p>
             </div>
-            <div id="weather__actual--graphic__representation"></div>
+            <div id="weather__actual--icon" class="location__weather__icon"></div>
         </div>
         <hr class="app__divider">
-        <div id="weather__actual__container">
-            <div class="weather__actual weather">WEATHER:</div>
-            <div class="weather__actual temperature">TEMPERATURE:</div>
-            <div class="weather__actual humidity">HUMIDITY:</div>
+        <div class="weather__at__location__wrapper">
+            <div>WEATHER:</div>
+            <div>TEMPERATURE:</div>
+            <div>HUMIDITY:</div>
         </div>
         <hr class="app__divider">
-        <div id="weather__actual__container--result">
-            <div class="weather__actual weather--result"></div>
-            <div class="weather__actual temperature--result"></div>
-            <div class="weather__actual humidity--result"></div>
+        <div class="weather__at__location__wrapper weather__at__location__wrapper--result">
+            <div id="weatherResult"></div>
+            <div id="tempResult"></div>
+            <div id="humResult"></div>
         </div>
     </div>
 </body>

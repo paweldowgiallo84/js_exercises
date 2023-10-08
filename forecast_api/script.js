@@ -1,13 +1,11 @@
 const locationCity = document.getElementById("location");
-const errorMsg = document.getElementById('error')
-const locationInput = document.getElementById("location--input");
-const searchBtn = document.getElementById("location--button");
-const weatherGraphic = document.getElementById(
-  "weather__actual--graphic__representation"
-);
-const resultWeather = document.querySelector(".weather--result");
-const resultTemperature = document.querySelector(".temperature--result");
-const resultHumidity = document.querySelector(".humidity--result");
+const errorMsg = document.getElementById("error");
+const locationInput = document.getElementById("locationInput");
+const searchBtn = document.getElementById("locationBtn");
+const weatherGraphic = document.getElementById("weather__actual--icon");
+const resultWeather = document.getElementById("weatherResult");
+const resultTemperature = document.getElementById("tempResult");
+const resultHumidity = document.getElementById("humResult");
 
 const BASE_API_URL = "https://api.openweathermap.org/data/2.5/weather?q=";
 const API_KEY = "&appid=7adf805dcbd828a359766ca039517208";
@@ -34,17 +32,16 @@ const getWeather = () => {
       resultTemperature.innerHTML = temp;
       resultHumidity.innerHTML = hum;
 
-      weatherGraphic.innerHTML = ''
-      errorMsg.innerHTML = ''
-        const icon = document.createElement("img");
-        icon.setAttribute("src", `./images/${weatherIcon}.png`);
-        icon.setAttribute("alt", "weather icon");        
-        weatherGraphic.append(icon);
+      weatherGraphic.innerHTML = "";
+      errorMsg.innerHTML = "";
+      const icon = document.createElement("img");
+      icon.setAttribute("src", `./images/${weatherIcon}.png`);
+      icon.setAttribute("alt", "weather icon");
+      weatherGraphic.append(icon);
 
       locationInput.value = "";
-    
     })
-    .catch((err) => errorMsg.innerHTML = `Podaj prawidłową nazwę miasta`);
+    .catch((err) => (errorMsg.innerHTML = `Podaj prawidłową nazwę miasta`));
 };
 
 searchBtn.addEventListener("click", getWeather);
