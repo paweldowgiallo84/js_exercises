@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="weather__container">
+        <p class="title">FORECAST</p>
+        <div id="location__graphic">
+            <div id="weather_localization">
+                <p id="location"></p>
+                <input type="text" id="location--input" placeholder="Insert city name">
+                <button id="location--button">SEARCH</button>
+            </div>
+            <div id="weather__actual--graphic__representation"></div>
+        </div>
+        <hr class="app__divider">
+        <div id="weather__actual__container">
+            <div class="weather__actual weather">WEATHER:</div>
+            <div class="weather__actual temperature">TEMPERATURE:</div>
+            <div class="weather__actual humidity">HUMIDITY:</div>
+        </div>
+        <hr class="app__divider">
+        <div id="weather__actual__container--result">
+            <div class="weather__actual weather--result"></div>
+            <div class="weather__actual temperature--result"></div>
+            <div class="weather__actual humidity--result"></div>
+        </div>
+    </div>
+</body>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="./script.js"></script>
+
+</html>
