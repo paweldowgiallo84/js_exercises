@@ -1,3 +1,5 @@
 learning curve from simple vanila js tasks to todo app with realtime firebase databa with user registration functionality... 
 
-The development version of the apk is available at: <b>https://to-do-firebase-realtime-database-git-to-abe88b-paweldowgiallo84.vercel.app/</b>
+The development version of the apk is available at: **https://to-do-firebase-realtime-database-5yzo3c2xh-paweldowgiallo84.vercel.app/**
+
+
