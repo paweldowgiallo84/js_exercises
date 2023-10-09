@@ -15,7 +15,6 @@ const database = firebase.database();
 
 // const user = document.querySelector(".user");
 const userEmail = JSON.parse(localStorage.getItem("userEmail"));
-const testInput = document.querySelector(".input__test");
 const taskDate = document.getElementById("task--date");
 const taskDescription = document.getElementById("task--desctiption");
 const todoToComplete = document.getElementsByClassName("task__container")[0];
@@ -32,11 +31,11 @@ const addTodoBtn = document.getElementById("add__todo__btn");
 const taskDoneBtn = document.getElementById("taskDone");
 const taskEditBtn = document.getElementById("taskEdit");
 const taskDeleteBtn = document.getElementById("taskDelete");
-const logoutBtn = document.getElementById("todo__logout");
+const logoutBtn = document.getElementById("logoutBtn");
 
 function addTodo() {
-  const todoInput = document.getElementById("todo__input");
-  const dateInput = document.getElementById("todo__date");
+  const todoInput = document.getElementById("todoInput");
+  const dateInput = document.getElementById("todoDate");
 
   if (todoInput.value.length != 0 && dateInput.value.length != 0) {
     var user = auth.currentUser;
@@ -107,8 +106,8 @@ const showTaskToBeDone = () => {
 
             task_container.append(single_task_description);
 
-            const task_tools_container = document.createElement("div");
-            task_tools_container.setAttribute("id", "task__tools__container");
+            const task_tools_container = document.createElement("div");           
+            task_tools_container.classList.add('task__tools__container')
             task_container.append(task_tools_container);
 
             const vertical_line = document.createElement("hr");
@@ -430,7 +429,8 @@ todoToComplete.addEventListener("click", function (event) {
     taskEdit(target);
   } else if (target.id === "taskDelete") {
     taskDelete(target);
-  } 
+  }
+ 
 });
 
 function currentDate() {

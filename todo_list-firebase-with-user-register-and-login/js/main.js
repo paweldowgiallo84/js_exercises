@@ -13,17 +13,16 @@ const app = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const database = firebase.database();
 
-const logInMain = document.querySelector(".login__container");
 const signInBtn = document.getElementById("btnSignUp");
 const logInBtn = document.getElementById("btnLogin");
-const spacerLine = document.querySelector(".spacer__line");
-const loginSignupQuestion = document.querySelector(".login__signup");
-const toggleChoice = document.querySelector(".toggle__login__signup");
-const emailMsg = document.getElementById('email__msg')
-const usernameMsg = document.getElementById('username__msg')
-const passwordMsg = document.getElementById('password__msg')
-const passwordInputRepetelMsg = document.getElementById('passwordInputRepete__msg')
-
+const loginSignupQuestion = document.getElementById("loginSignup");
+const toggleChoice = document.getElementById("loginSignupToggle");
+const emailMsg = document.getElementById("email__msg");
+const usernameMsg = document.getElementById("username__msg");
+const passwordMsg = document.getElementById("password__msg");
+const passwordInputRepetelMsg = document.getElementById(
+  "passwordInputRepete__msg"
+);
 
 const email = document.getElementById("emailInput");
 const username = document.getElementById("userName");
@@ -37,16 +36,25 @@ const register = () => {
   const passwordRepete = document.getElementById("passwordInputRepete").value;
 
   if (validateEmail(email) == false) {
-    alert("Nieprawidlowy adres email");
+    emailMsg.innerHTML = "Invalid email";
+    emailMsg.classList.add("invalid");
     return;
+  } else {
+    emailMsg.innerHTML = "";
   }
   if (validatePasswordSignin(password, passwordRepete) == false) {
-    alert("Nieprawdłowe hasło lub hasła się nie zgadzaja");
+    passwordMsg.innerHTML = "Invalid password or password don't match";
+    passwordMsg.classList.add("invalid");
     return;
+  } else {
+    passwordMsg.innerHTML = "";
   }
   if (validateUsername(username) == false) {
-    alert("Za krótka nazawa uzytkownika");
+    usernameMsg.innerHTML = "Username to short";
+    usernameMsg.classList.add("invalid");
     return;
+  } else {
+    usernameMsg.innerHTML = "";
   }
 
   auth
@@ -78,14 +86,18 @@ const login = () => {
   const password = document.getElementById("passwordInput").value;
 
   if (validateEmail(email) == false) {
-    emailMsg.innerHTML = 'Invalid email'
-    emailMsg.classList.add('invalid')
+    emailMsg.innerHTML = "Invalid email";
+    emailMsg.classList.add("invalid");
     return;
+  } else {
+    emailMsg.innerHTML = "";
   }
   if (validatePasswordLogin(password) == false) {
-    passwordMsg.innerHTML = 'Invalid password'
-    passwordMsg.classList.add('invalid')
+    passwordMsg.innerHTML = "Invalid password";
+    passwordMsg.classList.add("invalid");
     return;
+  } else {
+    passwordMsg.innerHTML = "";
   }
 
   auth
@@ -128,6 +140,8 @@ const showLoginShowSignup = () => {
   passwordRepete.classList.toggle("hiden");
   logInBtn.classList.toggle("hiden");
   signInBtn.classList.toggle("hiden");
+  usernameMsg.classList.toggle("hiden");
+  passwordInputRepetelMsg.classList.toggle("hiden");
 };
 
 const validateEmail = (email) => {
