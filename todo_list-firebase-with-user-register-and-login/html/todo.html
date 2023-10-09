@@ -21,37 +21,29 @@
 </head>
 
 <body>
-    <div id="app__container">
-        <div id="app">
-            <div id="todo__container">
-                <p class="title">TODO WITH DATABASE</p>
-                <div id="todo__input__container">
-                    <div id="inputs">
-                        <input type="text" id="todo__input">
-                        <input type="date" id="todo__date">
-                    </div>
-                    <i id="add__todo__btn" class="fa-solid fa-right-to-bracket fa-xl" style="color: #fff;"></i>
+    <div id="app">
+        <div class="todo__wrapper-todo">
+            <p class="title">TODO WITH DATABASE</p>
+            <div class="input__wrapper">
+                <div class="inputs">
+                    <input type="text" id="todoInput" class="input__text">
+                    <input type="date" id="todoDate" class="input__date">
                 </div>
-                <div class="todo__task__container">
-                    <p id="task__info--msg">TASK TODO</p>
-                    <div class="task__container">
-                    </div>
-                </div>
-
-                <div class="todo__task__container">
-                    <p id="task__info--finished">FINISHED TASKS</p>
-                    <div class="task__container">
-                    </div>
-
-                </div>
-
-                <button id="todo__logout">log out</button>
-
+                <i id="add__todo__btn" class="fa-solid fa-right-to-bracket fa-xl" style="color: #fff;"></i>
             </div>
+            <div class="todo__task__container">
+                <p class="task__info--msg" >TASK TODO</p>
+                <div class="task__container">
+                </div>
+            </div>
+            <div class="todo__task__container">
+                <p class="task__info--finished">FINISHED TASKS</p>
+                <div class="task__container">
+                </div>
+            </div>
+            <button id="logoutBtn" class="logout__btn">log out</button>
         </div>
-        <div id="result"></div>
     </div>
-
 </body>
 
 </html>

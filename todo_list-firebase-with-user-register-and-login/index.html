@@ -14,31 +14,29 @@
 </head>
 
 <body>
-    <div id="app__container">
-        <div id="app">
-            <div class="login__container">
-                <input class="email__input " type="email" id="emailInput" placeholder="john.doe@sth.com">
-                <p id="email__msg" class="message">Enter emial to login</p>
-                <input class="username__input hiden" type="text" id="userName" placeholder="johndoe">
-                <p id="username__msg" class="message hiden">Enter username</p>
-                <input class="password__input " type="password" id="passwordInput" placeholder="enter password">
-                <p id="password__msg" class="message">Enter password to login</p>
-                <input class="password__input repete hiden" type="password" id="passwordInputRepete"
-                    placeholder="verify password">
-                <p id="passwordInputRepete__msg" class="message hiden"></p>
-                <hr class="spacer__line ">
-                <div class="login__btns ">
-                    <button class="btn__login " id="btnLogin">Login</button>
-                    <button class="btn__signin hiden" id="btnSignUp">Sign Up</button>
-                    <p class="login__signup">Don't have an account? <span class="toggle__login__signup">SignUp</span>
-                    </p>
-                    <button class="btn__logout hiden" id="btnLogOut">Log Out</button>
-                </div>
-            </div>
 
+    <div class="todo__wrapper">
+        <div class="login__container">
+            <input class="email__input " type="email" id="emailInput" placeholder="john.doe@sth.com">
+            <p id="email__msg" class="message">Enter email</p>
+            <input class="username__input hiden" type="text" id="userName" placeholder="johndoe">
+            <p id="username__msg" class="message hiden">Enter username</p>
+            <input class="password__input " type="password" id="passwordInput" placeholder="enter password">
+            <p id="password__msg" class="message">Enter password</p>
+            <input class="password__input repete hiden" type="password" id="passwordInputRepete"
+                placeholder="verify password">
+            <p id="passwordInputRepete__msg" class="message hiden">Repete password</p>
+            <hr class="spacer__line ">
+            <div class="login__btns ">
+                <button class="btn__login " id="btnLogin">Login</button>
+                <button class="btn__signin hiden" id="btnSignUp">Sign Up</button>
+                <p id="loginSignup" class="login__signup">Don't have an account? <span id="loginSignupToggle" class="toggle__login__signup">SignUp</span>
+                </p>
+                <button class="btn__logout hiden" id="btnLogOut">Log Out</button>
+            </div>
         </div>
-        <div id="result"></div>
     </div>
+
 
 </body>
 <script type="module" src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>

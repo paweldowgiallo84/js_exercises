@@ -4,6 +4,7 @@
 }
 
 body {
+    min-width: 320px;
     background-image: url("../images/background-img-hi.webp");
     background-repeat: no-repeat;
     background-size: cover;
@@ -11,26 +12,21 @@ body {
     font-family: "Gabarito";
 }
 
-#app__container {
-    height: 100vh;
-    width: 100vw;
-}
-
-#app {    
+.todo__wrapper {    
     min-width: 15rem;
     width: fit-content;
     margin: 0 auto;
     padding: 1rem;
 }
 
-#app input {
+.todo__wrapper input {
     font-size: 16px;
     font-weight: bold;
     letter-spacing: 0.05rem;
     padding: 0.3rem 0.8rem;
 }
 
-#app button {
+.todo__wrapper button {
     font-size: 18px;
     font-weight: bold;
     width: 10rem;
@@ -59,7 +55,7 @@ body {
     backdrop-filter: blur(20px);
     border: 2px solid rgba(255, 255, 255, 0.075);
     border-radius: 10px;
-    margin-top: 20vh;
+    margin-top: 10vh;
     padding: 1rem;
     gap: 1.5rem;
 }
@@ -106,7 +102,7 @@ body {
 }
 
 @media (max-width: 460px) {
-    #app {
+    .todo__wrapper {
         width: 90%;
     }
 
